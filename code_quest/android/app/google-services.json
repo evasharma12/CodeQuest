@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "360206637477",
+    "project_id": "code-quest-3e2a7",
+    "storage_bucket": "code-quest-3e2a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360206637477:android:bf775f6a5b9619a2dbb04c",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360206637477-dl847a9jjof0o53mqgjm8v8caqhlhejc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRekpecGHpZ59oi_QPPvR519kLhQHGIJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360206637477-dl847a9jjof0o53mqgjm8v8caqhlhejc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
