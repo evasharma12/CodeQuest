@@ -1,27 +1,26 @@
 import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../Pages/writeanswer.dart';
-import '../methods/questions.dart';
 
 class PopQuestion extends StatefulWidget {
-  List<Questions> _questions;
-  var index;
+  var index, id;
 
-  PopQuestion(this._questions, this.index);
+  PopQuestion(this.index, this.id);
 
   @override
   _PopQuestionState createState() => _PopQuestionState();
 }
 
 class _PopQuestionState extends State<PopQuestion> {
+  var index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Material(
       child: SingleChildScrollView(
         child: Container(
-          
           color: Colors.grey[900],
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
@@ -58,16 +57,78 @@ class _PopQuestionState extends State<PopQuestion> {
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: widget._questions.map((questions) {
-                          return Text(
-                            '\n${widget._questions[widget.index].question}',
-                            style: TextStyle(
-                              letterSpacing: 2,
-                              color: Colors.black,
-                              fontSize: 15,
-                            ),
-                          );
-                        }).toList(),
+                        children: <Widget>[
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection(
+                                    'questions/NdlPlLZdFfX1Rv1aflFQ/doubts')
+                                .snapshots(),
+                            builder: (ctx, streamSnapshot) {
+                              if (streamSnapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              final documents = streamSnapshot.data.docs;
+                              return SafeArea(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20.0, 20, 20, 0),
+                                    child: Text('Question: ',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20.0, 10, 20, 20),
+                                    child: Text(
+                                        '${documents[widget.index]['question']}'),
+                                  ),
+                                ],
+                              ));
+                            },
+                          ),
+                          StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection(
+                                      'questions/NdlPlLZdFfX1Rv1aflFQ/answers').where("id", isEqualTo: widget.id)
+                                  .snapshots(),
+                              builder: (ctx, streamSnapshot) {
+                                if (streamSnapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                final documents = streamSnapshot.data.docs;
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(20,10,10,10),
+                                    child: Text(
+                                      'Answers: ',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  for (var i = 0; i < documents.length; i++)
+                                    
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(20, 0, 10, 10),
+                                      child: Text(documents[i]['answer']),
+                                    )
+
+                                  
+                                  
+                                ]);
+                              }),
+                        ],
                       ),
                     ),
                   ),
@@ -79,13 +140,15 @@ class _PopQuestionState extends State<PopQuestion> {
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
-                              'Answer',
-                              style: TextStyle(fontSize: 20, color: Colors.white),
+                              'Add Answer',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
                         ),
                         onPressed: (() {
-                          Navigator.push(context, SlideRightRoute(page: Answer()));
+                          Navigator.push(context,
+                              SlideRightRoute(page: Answer(widget.id)));
                         }),
                       ),
                     ),

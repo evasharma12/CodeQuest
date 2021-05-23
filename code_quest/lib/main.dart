@@ -1,16 +1,15 @@
-import 'package:chat_app/screens/start.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import './Pages/home.dart';
-import './Pages/writeanswer.dart';
 import './Pages/create.dart';
 import 'Pages/Profile.dart';
 import './Pages/doubts.dart';
 import './Pages/ask.dart';
 import './Pages/videos.dart';
 import './Pages/dashboard.dart';
+import './screens/start.dart';
 
 
 
@@ -21,7 +20,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
+ 
   @override
 
   Widget build(BuildContext context) {
@@ -53,13 +52,12 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/dashboard': (context) => Dashboard(),
-        '/doubts': (context) => Doubts(),
         '/ask': (context) => Ask(),
         '/videos': (context) => VideoView(),
         '/home': (context) => Home(),
         '/create': (context) => Create(),
         '/profile': (context) => Profile(),
-        '/answer': (context) => Answer(),
+        '/doubts': (context)=> Doubts(),
         '/start': (context) => Start(),
       },
     );

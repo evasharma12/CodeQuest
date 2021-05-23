@@ -1,268 +1,253 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Pages/popquestion.dart';
-import '../methods/questions.dart';
 import 'package:particles_flutter/particles_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Doubts extends StatefulWidget {
+  
   @override
   _DoubtsState createState() => _DoubtsState();
 }
 
 class _DoubtsState extends State<Doubts> {
-  final List<Questions> _questions = [
-    Questions(
-        date: DateTime.now(),
-        name: 'Xyz',
-        domain: 'Web D',
-        question: 'Question 1?'),
-    Questions(
-        date: DateTime.now(),
-        name: 'Xyz',
-        domain: 'App D',
-        question: 'Question 2?'),
-    Questions(
-        date: DateTime.now(),
-        name: 'Xyz',
-        domain: 'AI',
-        question: 'Question 3?'),
-  ];
+ 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[900],
-      //
-      appBar: AppBar(
-        brightness: Brightness.dark,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Colors.cyan[500]),
-        foregroundColor: Colors.cyan[500],
+    return 
+      
+         Scaffold(
         backgroundColor: Colors.grey[900],
-        centerTitle: true,
-        title: Text(
-          'Ask your Doubts',
-          textAlign: TextAlign.right,
-          style: TextStyle(color: Colors.cyan[400],),
+        //
+        appBar: AppBar(
+          brightness: Brightness.dark,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.cyan[500]),
+          foregroundColor: Colors.cyan[500],
+          backgroundColor: Colors.grey[900],
+          centerTitle: true,
+          title: Text(
+            'Ask your Doubts',
+            textAlign: TextAlign.right,
+            style: TextStyle(color: Colors.cyan[400],),
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Container(height: 50),
-        color: Colors.grey[800],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(
-          () {
-            Navigator.pushNamed(context, '/ask');
-          },
+        bottomNavigationBar: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          child: Container(height: 50),
+          color: Colors.grey[800],
         ),
-        backgroundColor: Colors.cyan[500],
-        child: const Icon(
-          Icons.add,
-          size: 30,
-          color: Colors.black,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => setState(
+            () {
+              Navigator.pushNamed(context, '/ask');
+            },
+          ),
+          backgroundColor: Colors.cyan[500],
+          child: const Icon(
+            Icons.add,
+            size: 30,
+            color: Colors.black,
+          ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CircularParticleScreen(),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              CircularParticleScreen(),
+              // SizedBox(height: 20),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: <Widget>[
+                  
+              //     ElevatedButton(
+              //       onPressed: () {},
+              //       child: Text(
+              //         'Dev',
+              //         style: TextStyle(
+              //             fontSize: 12,
+              //             color: Colors.cyan[500],
+              //             fontWeight: FontWeight.bold),
+              //       ),
+              //       style: ElevatedButton.styleFrom(
+              //         side: BorderSide(
+              //           color: Colors.cyan[500],
+              //         ),
+              //         primary: Colors.grey[900],
+              //         shape: const BeveledRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(10),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(width: 10),
+              //     ElevatedButton(
+              //       onPressed: () {},
+              //       child: Text(
+              //         'AI',
+              //         style: TextStyle(
+              //             fontSize: 12,
+              //             color: Colors.cyan[500],
+              //             fontWeight: FontWeight.bold),
+              //       ),
+              //       style: ElevatedButton.styleFrom(
+              //         side: BorderSide(
+              //           color: Colors.cyan[500],
+              //         ),
+              //         primary: Colors.grey[900],
+              //         shape: const BeveledRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(10),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(width: 10),
+              //     ElevatedButton(
+              //       onPressed: () {},
+              //       child: Text(
+              //         'ML',
+              //         style: TextStyle(
+              //             fontSize: 12,
+              //             color: Colors.cyan[500],
+              //             fontWeight: FontWeight.bold),
+              //       ),
+              //       style: ElevatedButton.styleFrom(
+              //         side: BorderSide(
+              //           color: Colors.cyan[500],
+              //         ),
+              //         primary: Colors.grey[900],
+              //         shape: const BeveledRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(10),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(width: 10),
+              //     ElevatedButton(
+              //       onPressed: () {},
+              //       child: Text(
+              //         'Cloud',
+              //         style: TextStyle(
+              //             fontSize: 12,
+              //             color: Colors.cyan[500],
+              //             fontWeight: FontWeight.bold),
+              //       ),
+              //       style: ElevatedButton.styleFrom(
+              //         side: BorderSide(
+              //           color: Colors.cyan[500],
+              //         ),
+              //         primary: Colors.grey[900],
+              //         shape: const BeveledRectangleBorder(
+              //           borderRadius: BorderRadius.all(
+              //             Radius.circular(10),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              SizedBox(
+                height: 10,
+              ),
+              Divider(
+                indent: 10,
+                endIndent: 10,
+                color: Colors.cyan[500],
+                height: 0,
+                thickness: 2,
+              ),
+              Container(
+                height: 600,
                 
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Dev',
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.cyan[500],
-                        fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    side: BorderSide(
-                      color: Colors.cyan[500],
-                    ),
-                    primary: Colors.grey[900],
-                    shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'AI',
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.cyan[500],
-                        fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    side: BorderSide(
-                      color: Colors.cyan[500],
-                    ),
-                    primary: Colors.grey[900],
-                    shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'ML',
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.cyan[500],
-                        fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    side: BorderSide(
-                      color: Colors.cyan[500],
-                    ),
-                    primary: Colors.grey[900],
-                    shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Cloud',
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.cyan[500],
-                        fontWeight: FontWeight.bold),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    side: BorderSide(
-                      color: Colors.cyan[500],
-                    ),
-                    primary: Colors.grey[900],
-                    shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Divider(
-              indent: 10,
-              endIndent: 10,
-              color: Colors.cyan[500],
-              height: 0,
-              thickness: 2,
-            ),
-            Container(
-              height: 600,
-              child: ListView.builder(
-                itemBuilder: (ctx, index) {
-                  return Column(
-                    children: [
-                      SizedBox(height: 20),
-                      Card(
-                        color: Colors.grey[800].withOpacity(.8),
-                        elevation: 2,
-                        margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: ListTile(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                ScaleRoute(
-                                  page: PopQuestion(_questions, index),
-                                ),
-                              );
-                              print('worked');
-                            },
-                            leading: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Date: ${_questions[index].date}",
-                                    style: TextStyle(
-                                      letterSpacing: 2,
-                                      color: Colors.white,
-                                      fontSize: 12,
+                child: StreamBuilder(
+          stream: FirebaseFirestore.instance
+                .collection('questions/NdlPlLZdFfX1Rv1aflFQ/doubts')
+                .snapshots(),
+          builder: (ctx, streamSnapshot){
+            if(streamSnapshot.connectionState == ConnectionState.waiting){
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final documents = streamSnapshot.data.docs;
+            return ListView.builder(
+          itemCount: documents.length,
+          itemBuilder: (ctx, index)  {
+                        return Column(
+                      children: [
+                          SizedBox(height: 20),
+                          Card(
+                            color: Colors.grey[800].withOpacity(.8),
+                            elevation: 2,
+                            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: ListTile(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    ScaleRoute(
+                                      page: PopQuestion(index,documents[index].id),
                                     ),
-                                  ),
-                                  SizedBox(height: 3),
-                                  Text(
-                                    "Domain: ${_questions[index].domain}",
-                                    style: TextStyle(
-                                      letterSpacing: 2,
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  SizedBox(height: 3),
-                                  Text(
-                                    "Asked By: ${_questions[index].name}",
-                                    style: TextStyle(
-                                      letterSpacing: 2,
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Container(
-                                    child: Text(
-                                      "Question: ${_questions[index].question}",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        letterSpacing: 2,
-                                        color: Colors.white,
-                                        fontSize: 15,
+                                  );
+                                  
+                                },
+                                leading: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      
+                                      Text("Asked by: ${documents[index]['name']}",
+                                        style: TextStyle(
+                                          letterSpacing: 2,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
                                       ),
-                                    ),
+                                      SizedBox(height: 3),
+                                      Text(
+                                        "Domain: ${documents[index]['domain']}",
+                                        style: TextStyle(
+                                          letterSpacing: 2,
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        child: Text(
+                                          "Question: ${documents[index]['question']}",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            letterSpacing: 2,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      
+                                    ],
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  // Divider(
-                                  //   indent: 10,
-                                  //   endIndent: 10,
-                                  //   color: Colors.cyan[500],
-                                  //   height: 0,
-                                  //   thickness: 2,
-                                  // ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: _questions.length,
+                      ],
+                    );
+          }
+        );
+          }),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      
     );
   }
 }
