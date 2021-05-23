@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../methods/linepainters.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Create extends StatefulWidget {
   @override
@@ -7,6 +8,31 @@ class Create extends StatefulWidget {
 }
 
 class _CreateState extends State<Create> {
+  var name = '';
+  var title = '';
+  var url = '';
+
+  void _pressed() {
+    FocusScope.of(context).unfocus();
+    if (name.isNotEmpty && title.isNotEmpty && url.isNotEmpty) {
+      FirebaseFirestore.instance.collection('videos').add(
+        {
+          'name': name,
+          'title': title,
+          'url': url,
+        },
+      );
+      setState(() {
+        Navigator.pop(context);
+      });
+    }
+    else {
+      setState(() {
+        Navigator.pop(context);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +47,9 @@ class _CreateState extends State<Create> {
         title: Text(
           "Create",
           textAlign: TextAlign.right,
-          style: TextStyle(color: Colors.cyan[400],),
+          style: TextStyle(
+            color: Colors.cyan[400],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -33,9 +61,7 @@ class _CreateState extends State<Create> {
             fontSize: 12,
           ),
         ),
-        onPressed: (() {
-          Navigator.pop(context, '/videos');
-        }),
+        onPressed: _pressed,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -43,81 +69,117 @@ class _CreateState extends State<Create> {
           child: Column(
             children: <Widget>[
               Card(
-                child: TextField(
+                child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   maxLines: 1,
                   decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.cyan[300],
-                          width: 1,
-                        ),
-                      ),
-                      labelText: 'Your Name',
-                      fillColor: Colors.white),
+                    labelText: ' Your Name',
+                    labelStyle: TextStyle(
+                      color: Colors.grey[900],
+                      letterSpacing: 2,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.cyan),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.cyan),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        name = value.trim();
+                      },
+                    );
+                  },
                 ),
               ),
               Card(
-                child: TextField(
+                child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   maxLines: 1,
                   decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.cyan[300],
-                          width: 1,
-                        ),
-                      ),
-                      labelText: 'Title of your video'),
+                    labelText: ' Title of your video',
+                    labelStyle: TextStyle(
+                      color: Colors.grey[900],
+                      letterSpacing: 2,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.cyan),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.cyan),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        title = value.trim();
+                      },
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 5),
               Card(
-                child: TextField(
+                child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   maxLines: 1,
                   decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.cyan[300],
-                          width: 1,
-                        ),
-                      ),
-                      labelText: 'URL of the video',
-                      fillColor: Colors.white),
+                    labelText: ' URL of your video',
+                    labelStyle: TextStyle(
+                      color: Colors.grey[900],
+                      letterSpacing: 2,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.cyan),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.cyan),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        url = value.trim();
+                      },
+                    );
+                  },
                 ),
               ),
-              SizedBox(height: 50,),
-              Container(
-
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(foregroundPainter: LinePainter1(),)
+              SizedBox(
+                height: 50,
               ),
               Container(
-
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  child: CustomPaint(
+                    foregroundPainter: LinePainter1(),
+                  )),
+              Container(
                   height: 70,
                   width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(foregroundPainter: LinePainter2(),)
-              ),
+                  child: CustomPaint(
+                    foregroundPainter: LinePainter2(),
+                  )),
               Container(
-
                   height: 50,
-                  width: MediaQuery.of(context).size.width ,
-                  child: CustomPaint(foregroundPainter: LinePainter3(),)
-              ),
+                  width: MediaQuery.of(context).size.width,
+                  child: CustomPaint(
+                    foregroundPainter: LinePainter3(),
+                  )),
               Container(
-
                   height: 30,
                   width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(foregroundPainter: LinePainter4(),)
-              ),
+                  child: CustomPaint(
+                    foregroundPainter: LinePainter4(),
+                  )),
               Container(
-
                   height: 70,
                   width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(foregroundPainter: LinePainter5(),)
-              ),
+                  child: CustomPaint(
+                    foregroundPainter: LinePainter5(),
+                  )),
             ],
           ),
         ),

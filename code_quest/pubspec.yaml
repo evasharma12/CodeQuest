@@ -38,6 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   cloud_firestore: ^2.1.0
   firebase_auth: ^1.1.4
+  youtube_player_flutter: ^8.0.0
+  flushbar: ^1.10.4
 
 dev_dependencies:
   flutter_test:

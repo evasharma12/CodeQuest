@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/dashboard': (context) => Dashboard(),
         '/ask': (context) => Ask(),
-        '/videos': (context) => VideoView(),
+        '/videos': (context) => Videos(),
         '/home': (context) => Home(),
         '/create': (context) => Create(),
         '/profile': (context) => Profile(),
