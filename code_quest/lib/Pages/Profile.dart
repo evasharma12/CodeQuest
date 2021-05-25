@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:particles_flutter/particles_flutter.dart';
+import 'package:chat_app/screens/start.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -64,14 +65,35 @@ class _ProfileState extends State<Profile> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  "${user.displayName}",
-                  style: TextStyle(
-                    color: Colors.cyan[400],
-                    letterSpacing: 3,
-                    
-                    fontSize: 20,
-                  ),
+                Column(
+                  children: [StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .where("email", isEqualTo: user.email)
+                          .snapshots(),
+                      builder: (ctx, streamSnapshot) {
+                        if (streamSnapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        final documents = streamSnapshot.data.docs;
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            for (var i = 0; i < documents.length; i++)
+                              Text(
+                                documents[i]['username'],
+                                style: TextStyle(
+                                  color: Colors.cyan[400],
+                                  letterSpacing: 3,
+                                  fontSize: 18,
+                                ),
+                              )
+                          ],
+                        );
+                      }),],
                 ),
               ],
             ),
@@ -81,7 +103,7 @@ class _ProfileState extends State<Profile> {
             Row(
               children: [
                 Text(
-                  "CURRENT LEVEL:  ",
+                  "CURRENT LEAGUE:  ",
                   style: TextStyle(
                     color: Colors.grey,
                     letterSpacing: 2,
@@ -89,11 +111,10 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 Text(
-                  "Beginner",
+                  "Champion",
                   style: TextStyle(
                     color: Colors.cyan[400],
                     letterSpacing: 3,
-                    
                     fontSize: 18,
                   ),
                 ),
@@ -113,7 +134,6 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(
                     color: Colors.grey,
                     letterSpacing: 2,
-                    
                     fontSize: 18,
                   ),
                 ),
@@ -121,14 +141,13 @@ class _ProfileState extends State<Profile> {
                   width: 10,
                 ),
                 Flexible(
-                                  child: Container(
+                  child: Container(
                     child: Text(
                       "${user.email}",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.cyan[400],
                         letterSpacing: 3,
-                        
                         fontSize: 18,
                       ),
                     ),
@@ -144,12 +163,20 @@ class _ProfileState extends State<Profile> {
               thickness: 2,
               color: Colors.cyan[400],
             ),
-            
             RaisedButton(
                 color: Colors.cyan[400],
-                child: Text('Logout', style: TextStyle(color: Colors.white)),
+                child: Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => Start(),
+                      ),
+                      (route) => false);
                 })
           ],
         ),
@@ -203,6 +230,7 @@ class CircularParticleScreen extends StatelessWidget {
 
 class ScaleRoute extends PageRouteBuilder {
   final Widget page;
+
   ScaleRoute({this.page})
       : super(
           pageBuilder: (

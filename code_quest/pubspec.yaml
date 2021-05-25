@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: 
+  http:
   simple_animations: ^3.1.1
   animated_background: ^2.0.0
   particles_flutter: ^0.1.2
@@ -60,7 +60,7 @@ flutter:
   assets:
     - assets/images/laptop.png
     - assets/images/image.jpg
-    
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -73,10 +73,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Header
+      fonts:
+        - asset: assets/fonts/Header.ttf
+    - family: Title
+      fonts:
+        - asset: assets/fonts/Title.ttf
+    - family: Content
+      fonts:
+          - asset: assets/fonts/content.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

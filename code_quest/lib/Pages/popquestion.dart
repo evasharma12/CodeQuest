@@ -30,7 +30,7 @@ class _PopQuestionState extends State<PopQuestion> {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.arrow_back),
-                    color: Colors.cyan[500],
+                    color: Colors.tealAccent,
                     onPressed: () {
                       Navigator.pop(context, '/doubts');
                     },
@@ -38,20 +38,8 @@ class _PopQuestionState extends State<PopQuestion> {
                   Container(
                     height: MediaQuery.of(context).size.height - 180,
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.fromLTRB(40, 10, 40, 20),
+                    margin: EdgeInsets.fromLTRB(20, 5, 20, 10),
                     decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.black,
-                        //     blurRadius: 10.0,
-                        //     spreadRadius: 2.0,
-                        //     offset: Offset(
-                        //       5.0,
-                        //       5.0,
-                        //     ),
-                        // )
-                        // ],
-                        // ],
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: SingleChildScrollView(
@@ -94,23 +82,25 @@ class _PopQuestionState extends State<PopQuestion> {
                             },
                           ),
                           StreamBuilder(
-                              stream: FirebaseFirestore.instance
-                                  .collection(
-                                      'questions/NdlPlLZdFfX1Rv1aflFQ/answers').where("id", isEqualTo: widget.id)
-                                  .snapshots(),
-                              builder: (ctx, streamSnapshot) {
-                                if (streamSnapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                                final documents = streamSnapshot.data.docs;
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
+                            stream: FirebaseFirestore.instance
+                                .collection(
+                                    'questions/NdlPlLZdFfX1Rv1aflFQ/answers')
+                                .where("id", isEqualTo: widget.id)
+                                .snapshots(),
+                            builder: (ctx, streamSnapshot) {
+                              if (streamSnapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              final documents = streamSnapshot.data.docs;
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(20,10,10,10),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20, 10, 10, 10),
                                     child: Text(
                                       'Answers: ',
                                       style: TextStyle(
@@ -118,16 +108,15 @@ class _PopQuestionState extends State<PopQuestion> {
                                     ),
                                   ),
                                   for (var i = 0; i < documents.length; i++)
-                                    
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(20, 0, 10, 10),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 0, 10, 10),
                                       child: Text(documents[i]['answer']),
                                     )
-
-                                  
-                                  
-                                ]);
-                              }),
+                                ],
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -135,7 +124,7 @@ class _PopQuestionState extends State<PopQuestion> {
                   Container(
                     child: Center(
                       child: RaisedButton(
-                        color: Colors.cyan[500],
+                        color: Colors.teal,
                         child: FittedBox(
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -147,8 +136,12 @@ class _PopQuestionState extends State<PopQuestion> {
                           ),
                         ),
                         onPressed: (() {
-                          Navigator.push(context,
-                              SlideRightRoute(page: Answer(widget.id)));
+                          Navigator.push(
+                            context,
+                            SlideRightRoute(
+                              page: Answer(widget.id),
+                            ),
+                          );
                         }),
                       ),
                     ),

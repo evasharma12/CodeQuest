@@ -4,250 +4,154 @@ import 'package:particles_flutter/particles_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Doubts extends StatefulWidget {
-  
   @override
   _DoubtsState createState() => _DoubtsState();
 }
 
 class _DoubtsState extends State<Doubts> {
- 
   @override
   Widget build(BuildContext context) {
-    return 
-      
-         Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.grey[900],
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.tealAccent),
+        foregroundColor: Colors.tealAccent,
         backgroundColor: Colors.grey[900],
-        //
-        appBar: AppBar(
-          brightness: Brightness.dark,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Colors.cyan[500]),
-          foregroundColor: Colors.cyan[500],
-          backgroundColor: Colors.grey[900],
-          centerTitle: true,
-          title: Text(
-            'Ask your Doubts',
-            textAlign: TextAlign.right,
-            style: TextStyle(color: Colors.cyan[400],),
+        centerTitle: true,
+        title: Text(
+          'Ask your Doubts',
+          textAlign: TextAlign.right,
+          style: TextStyle(
+            color: Colors.tealAccent,
+            fontFamily: 'Title',
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          child: Container(height: 50),
-          color: Colors.grey[800],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Container(height: 50),
+        color: Colors.grey[800],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(
+          () {
+            Navigator.pushNamed(context, '/ask');
+          },
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => setState(
-            () {
-              Navigator.pushNamed(context, '/ask');
-            },
-          ),
-          backgroundColor: Colors.cyan[500],
-          child: const Icon(
-            Icons.add,
-            size: 30,
-            color: Colors.black,
-          ),
+        backgroundColor: Colors.tealAccent,
+        child: const Icon(
+          Icons.add,
+          size: 30,
+          color: Colors.black,
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              CircularParticleScreen(),
-              // SizedBox(height: 20),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: <Widget>[
-                  
-              //     ElevatedButton(
-              //       onPressed: () {},
-              //       child: Text(
-              //         'Dev',
-              //         style: TextStyle(
-              //             fontSize: 12,
-              //             color: Colors.cyan[500],
-              //             fontWeight: FontWeight.bold),
-              //       ),
-              //       style: ElevatedButton.styleFrom(
-              //         side: BorderSide(
-              //           color: Colors.cyan[500],
-              //         ),
-              //         primary: Colors.grey[900],
-              //         shape: const BeveledRectangleBorder(
-              //           borderRadius: BorderRadius.all(
-              //             Radius.circular(10),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     ElevatedButton(
-              //       onPressed: () {},
-              //       child: Text(
-              //         'AI',
-              //         style: TextStyle(
-              //             fontSize: 12,
-              //             color: Colors.cyan[500],
-              //             fontWeight: FontWeight.bold),
-              //       ),
-              //       style: ElevatedButton.styleFrom(
-              //         side: BorderSide(
-              //           color: Colors.cyan[500],
-              //         ),
-              //         primary: Colors.grey[900],
-              //         shape: const BeveledRectangleBorder(
-              //           borderRadius: BorderRadius.all(
-              //             Radius.circular(10),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     ElevatedButton(
-              //       onPressed: () {},
-              //       child: Text(
-              //         'ML',
-              //         style: TextStyle(
-              //             fontSize: 12,
-              //             color: Colors.cyan[500],
-              //             fontWeight: FontWeight.bold),
-              //       ),
-              //       style: ElevatedButton.styleFrom(
-              //         side: BorderSide(
-              //           color: Colors.cyan[500],
-              //         ),
-              //         primary: Colors.grey[900],
-              //         shape: const BeveledRectangleBorder(
-              //           borderRadius: BorderRadius.all(
-              //             Radius.circular(10),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(width: 10),
-              //     ElevatedButton(
-              //       onPressed: () {},
-              //       child: Text(
-              //         'Cloud',
-              //         style: TextStyle(
-              //             fontSize: 12,
-              //             color: Colors.cyan[500],
-              //             fontWeight: FontWeight.bold),
-              //       ),
-              //       style: ElevatedButton.styleFrom(
-              //         side: BorderSide(
-              //           color: Colors.cyan[500],
-              //         ),
-              //         primary: Colors.grey[900],
-              //         shape: const BeveledRectangleBorder(
-              //           borderRadius: BorderRadius.all(
-              //             Radius.circular(10),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              SizedBox(
-                height: 10,
-              ),
-              Divider(
-                indent: 10,
-                endIndent: 10,
-                color: Colors.cyan[500],
-                height: 0,
-                thickness: 2,
-              ),
-              Container(
-                height: 600,
-                
-                child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-                .collection('questions/NdlPlLZdFfX1Rv1aflFQ/doubts')
-                .snapshots(),
-          builder: (ctx, streamSnapshot){
-            if(streamSnapshot.connectionState == ConnectionState.waiting){
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final documents = streamSnapshot.data.docs;
-            return ListView.builder(
-          itemCount: documents.length,
-          itemBuilder: (ctx, index)  {
-                        return Column(
-                      children: [
-                          SizedBox(height: 20),
-                          Card(
-                            color: Colors.grey[800].withOpacity(.8),
-                            elevation: 2,
-                            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: ListTile(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    ScaleRoute(
-                                      page: PopQuestion(index,documents[index].id),
-                                    ),
-                                  );
-                                  
-                                },
-                                leading: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      
-                                      Text("Asked by: ${documents[index]['name']}",
-                                        style: TextStyle(
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontSize: 12,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            CircularParticleScreen(),
+            SizedBox(
+              height: 10,
+            ),
+            Divider(
+              indent: 10,
+              endIndent: 10,
+              color: Colors.tealAccent,
+              height: 0,
+              thickness: 2,
+            ),
+            Container(
+              height: 600,
+              child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('questions/NdlPlLZdFfX1Rv1aflFQ/doubts')
+                      .snapshots(),
+                  builder: (ctx, streamSnapshot) {
+                    if (streamSnapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    final documents = streamSnapshot.data.docs;
+                    return ListView.builder(
+                        itemCount: documents.length,
+                        itemBuilder: (ctx, index) {
+                          return Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Container(
+                                color: Colors.grey[800].withOpacity(.8),
+                                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: ListTile(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        ScaleRoute(
+                                          page: PopQuestion(
+                                              index, documents[index].id),
                                         ),
-                                      ),
-                                      SizedBox(height: 3),
-                                      Text(
-                                        "Domain: ${documents[index]['domain']}",
-                                        style: TextStyle(
-                                          letterSpacing: 2,
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Container(
-                                        child: Text(
-                                          "Question: ${documents[index]['question']}",
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            letterSpacing: 2,
-                                            color: Colors.white,
-                                            fontSize: 15,
+                                      );
+                                    },
+                                    leading: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Asked by: ${documents[index]['name']}",
+                                            style: TextStyle(
+                                              letterSpacing: 2,
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontFamily: 'Content',
+                                            ),
                                           ),
-                                        ),
+                                          SizedBox(height: 3),
+                                          Text(
+                                            "Domain: ${documents[index]['domain']}",
+                                            style: TextStyle(
+                                              letterSpacing: 2,
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontFamily: 'Title',
+                                            ),
+                                          ),
+                                          SizedBox(height: 5),
+                                          Container(
+                                            child: Text(
+                                              "Question: ${documents[index]['question']}",
+                                              overflow: TextOverflow.clip,
+                                              style: TextStyle(
+                                                letterSpacing: 2,
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontFamily: 'Title',
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                      ],
-                    );
-          }
-        );
-          }),
-              ),
-            ],
-          ),
+                            ],
+                          );
+                        });
+                  }),
+            ),
+          ],
         ),
-      
+      ),
     );
   }
 }
@@ -280,7 +184,7 @@ class CircularParticleScreen extends StatelessWidget {
               Colors.white.withAlpha(210),
               Colors.white.withAlpha(210),
               Colors.black.withAlpha(210),
-              Colors.cyan[500].withAlpha(210)
+              Colors.tealAccent.withAlpha(210)
             ],
             awayAnimationCurve: Curves.easeInOutBack,
             enableHover: true,
@@ -297,6 +201,7 @@ class CircularParticleScreen extends StatelessWidget {
 
 class ScaleRoute extends PageRouteBuilder {
   final Widget page;
+
   ScaleRoute({this.page})
       : super(
           pageBuilder: (

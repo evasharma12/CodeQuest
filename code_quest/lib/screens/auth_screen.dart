@@ -13,6 +13,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
+
   void _submitAuthForm(
     String email,
     String username,
@@ -22,15 +23,19 @@ class _AuthScreenState extends State<AuthScreen> {
     UserCredential authResult;
 
     try {
-      setState(() {
-        _isLoading = true;
-      });
+      // setState(() {
+      //   _isLoading = true;
+      // });
       if (isLogin) {
         authResult = await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
+          email: email,
+          password: password,
+        );
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
+          email: email,
+          password: password,
+        );
 
         await FirebaseFirestore.instance
             .collection('users')
@@ -46,21 +51,20 @@ class _AuthScreenState extends State<AuthScreen> {
       if (err.message != null) {
         message = err.message;
       }
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(err.message),
-        backgroundColor: Theme.of(context).errorColor,
-      ));
-      setState(() {
-        _isLoading = false;
-      });
-    } 
-    catch (err) {
-      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(err.message),
+          backgroundColor: Theme.of(context).errorColor,
+        ),
+      );
+      // setState(() {
+      //   _isLoading = false;
+      // });
+    } catch (err) {
       print('err');
-      setState(() {
-        _isLoading = false;
-      });
-      
+      // setState(() {
+      //   _isLoading = false;
+      // });
     }
   }
 

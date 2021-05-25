@@ -61,24 +61,29 @@ class _VideosState extends State<Videos> {
                       children: [
                         Container(
                           margin: EdgeInsets.all(8),
-                          child: YoutubePlayer(
-                            controller: YoutubePlayerController(
-                              initialVideoId: YoutubePlayer.convertUrlToId(
-                                videoSnapshot.data.docs[index]['url'],
+                          child: YoutubePlayerBuilder(
+                            builder: (context, player){
+                              return player;
+                            },
+                            player: YoutubePlayer(
+                              controller: YoutubePlayerController(
+                                initialVideoId: YoutubePlayer.convertUrlToId(
+                                  videoSnapshot.data.docs[index]['url'],
+                                ),
+                                flags: YoutubePlayerFlags(
+                                  forceHD: true,
+                                  isLive: false,
+                                  startAt: 0,
+                                  controlsVisibleAtStart: true,
+                                  autoPlay: false,
+                                ),
                               ),
-                              flags: YoutubePlayerFlags(
-                                forceHD: true,
-                                isLive: false,
-                                startAt: 0,
-                                controlsVisibleAtStart: true,
-                                autoPlay: false,
-                              ),
+                              showVideoProgressIndicator: true,
+                              progressIndicatorColor: Colors.cyan,
+                              progressColors: ProgressBarColors(
+                                  playedColor: Colors.cyan,
+                                  handleColor: Colors.cyanAccent),
                             ),
-                            showVideoProgressIndicator: true,
-                            progressIndicatorColor: Colors.cyan,
-                            progressColors: ProgressBarColors(
-                                playedColor: Colors.cyan,
-                                handleColor: Colors.cyanAccent),
                           ),
                         ),
                         Text(

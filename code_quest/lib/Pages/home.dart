@@ -1,6 +1,7 @@
 import '../methods/circlepainters.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var user = FirebaseAuth.instance.currentUser;
-  var username, email, photoUrl;
+  var email, photoUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +21,18 @@ class _HomeState extends State<Home> {
         toolbarHeight: 60,
         brightness: Brightness.dark,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.cyan[500]),
-        foregroundColor: Colors.cyan[500],
+        iconTheme: IconThemeData(color: Colors.tealAccent),
+        foregroundColor: Colors.tealAccent,
         backgroundColor: Colors.grey[900],
         shadowColor: Colors.grey[800],
         centerTitle: true,
         title: Text(
           "Home",
-          style: TextStyle(color: Colors.cyan[400]),
+          style: TextStyle(
+            color: Colors.tealAccent,
+            fontFamily: 'Title',
+            letterSpacing: 2,
+          ),
           textAlign: TextAlign.center,
         ),
       ),
@@ -43,14 +48,35 @@ class _HomeState extends State<Home> {
                   children: [
                     UserAccountsDrawerHeader(
                       decoration: BoxDecoration(color: Colors.grey[900]),
-                      accountName: Text(
-                        '${user.displayName}',
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 2,
-                            color: Colors.cyan[400]),
-                      ),
+                      accountName: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('users')
+                              .where("email", isEqualTo: user.email)
+                              .snapshots(),
+                          builder: (ctx, streamSnapshot) {
+                            if (streamSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            final documents = streamSnapshot.data.docs;
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                for (var i = 0; i < documents.length; i++)
+                                  Text(
+                                    documents[i]['username'],
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      letterSpacing: 2,
+                                      fontSize: 30,
+                                      fontFamily: 'Header',
+                                    ),
+                                  )
+                              ],
+                            );
+                          }),
                       accountEmail: Text(
                         '${user.email}',
                         style: TextStyle(
@@ -58,13 +84,14 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.normal,
                           letterSpacing: 2,
                           color: Colors.white,
+                          fontFamily: 'Title',
                         ),
                       ),
                       margin: EdgeInsets.all(0),
                     ),
                     Divider(
                       thickness: 4,
-                      color: Colors.cyan[500],
+                      color: Colors.tealAccent,
                       height: 0,
                     ),
                     SizedBox(
@@ -78,7 +105,7 @@ class _HomeState extends State<Home> {
                           alignment: Alignment.center,
                           child: Icon(
                             Icons.question_answer_outlined,
-                            color: Colors.cyan[500],
+                            color: Colors.tealAccent,
                             size: 20,
                           ),
                         ),
@@ -91,6 +118,7 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
                           color: Colors.white,
+                          fontFamily: 'Title',
                         ),
                       ),
                       onTap: () {
@@ -108,7 +136,7 @@ class _HomeState extends State<Home> {
                           alignment: Alignment.center,
                           child: Icon(
                             Icons.video_library_outlined,
-                            color: Colors.cyan[500],
+                            color: Colors.tealAccent,
                             size: 20,
                           ),
                         ),
@@ -124,6 +152,7 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
                           color: Colors.white,
+                          fontFamily: 'Title',
                         ),
                       ),
                     ),
@@ -138,7 +167,7 @@ class _HomeState extends State<Home> {
                           alignment: Alignment.center,
                           child: Icon(
                             Icons.settings,
-                            color: Colors.cyan[500],
+                            color: Colors.tealAccent,
                             size: 20,
                           ),
                         ),
@@ -154,6 +183,7 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
                           color: Colors.white,
+                          fontFamily: 'Title',
                         ),
                       ),
                     ),
@@ -181,14 +211,20 @@ class _HomeState extends State<Home> {
               children: [
                 Text(
                   '\n\n\"Any fool can write code that a computer can understand. Good programmers write code that humans can understand.\"',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Content',
+                    fontSize: 15,
+                  ),
                 ),
                 Text(
                   '\n-Martin Fowler',
                   style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      fontSize: 12,
-                      color: Colors.cyan[500]),
+                    fontStyle: FontStyle.italic,
+                    fontSize: 12,
+                    color: Colors.tealAccent,
+                    fontFamily: 'Title',
+                  ),
                 )
               ],
             ),

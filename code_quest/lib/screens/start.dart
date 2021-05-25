@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../methods/circlepainters.dart';
@@ -9,7 +10,6 @@ class Start extends StatefulWidget {
 }
 
 class _StartState extends State<Start> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +19,12 @@ class _StartState extends State<Start> {
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 250,
@@ -28,80 +32,97 @@ class _StartState extends State<Start> {
                       image: AssetImage('assets/images/laptop.png'),
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   RichText(
                     text: TextSpan(
-                        text: 'Welcome to  ',
-                        style: TextStyle(
-                          fontSize: 25.0,
+                      text: 'Welcome to ',
+                      style: TextStyle(
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          fontFamily: 'Title'),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Code Quest',
+                          style: TextStyle(
+                              fontSize: 36,
+                              color: Colors.tealAccent,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Header'),
                         ),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Code Quest',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.cyan[500],
-                                fontWeight: FontWeight.bold,
-                              ))
-                        ]),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 30),
                   Text(
                     'Tap below to continue to the',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: 'Content',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Text(
-                    'Code Quest ',
+                    'Code Quest',
                     style: TextStyle(
-                        color: Colors.cyan[500],
-                        fontSize: 17,
-                        fontStyle: FontStyle.italic),
+                      color: Colors.tealAccent,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Header',
+                    ),
                   ),
-                  
+                  SizedBox(
+                    height: 5,
+                  ),
                   Text(
                     'and let the learning begin!',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: 'Content',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(
                     height: 40,
                   ),
                   Container(
-                    width: 150,
-                    child: RaisedButton(
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> AuthScreen()));
-                      }
-                      ,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                        child: Text(
-                          'Get Started ...',
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 15),
+                    child: ElevatedButton(
+                      style: OutlinedButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: Colors.teal,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      color: Colors.cyan[500],
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AuthScreen(),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(2, 10, 2, 10),
+                        child: Text(
+                          'Get Started...',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'Title',
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(width: 20),
-                  SizedBox(height: 20),
-                  //google sign in button
-                  
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height - 400,
-                    child: CustomPaint(
-                      foregroundPainter: CirclePainter3(),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height - 600,
-                    child: CustomPaint(
-                      foregroundPainter: CirclePainter1(),
-                    ),
-                  )
                 ],
               ),
             ),

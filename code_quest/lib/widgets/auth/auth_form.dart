@@ -49,6 +49,8 @@ class _AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        shadowColor: Colors.tealAccent,
+        elevation: 5,
         margin: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Padding(
@@ -70,6 +72,11 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
+                      labelStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Title',
+                      ),
                       labelText: 'Email address',
                     ),
                     onSaved: (value) {
@@ -85,7 +92,14 @@ class _AuthFormState extends State<AuthForm> {
                         }
                         return null;
                       },
-                      decoration: InputDecoration(labelText: 'User Name'),
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Title',
+                        ),
+                        labelText: 'User Name',
+                      ),
                       onSaved: (value) {
                         _userName = value;
                       },
@@ -98,30 +112,52 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Title',
+                      ),
+                      labelText: 'Password',
+                    ),
                     obscureText: true,
                     onSaved: (value) {
                       _userPassword = value;
                     },
                   ),
                   SizedBox(height: 12),
-                  if (widget.isLoading)CircularProgressIndicator(),
-                  if (!widget.isLoading)
-                    RaisedButton(
-                        child: Text(_isLogin ? 'Log In' : 'SignUp'),
-                        onPressed: _trySubmit),
-                  if (!widget.isLoading)
-                    FlatButton(
-                      textColor: Colors.black,
-                      child: Text(_isLogin
+                  // if (widget.isLoading)CircularProgressIndicator(),
+                  // if (!widget.isLoading)
+                  RaisedButton(
+                      color: Colors.teal,
+                      child: Text(
+                        _isLogin ? 'Log In' : 'SignUp',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Title',
+                        ),
+                      ),
+                      onPressed: _trySubmit),
+                  // if (!widget.isLoading)
+                  FlatButton(
+                    textColor: Colors.black,
+                    child: Text(
+                      _isLogin
                           ? 'Create new account'
-                          : 'I already have an account'),
-                      onPressed: () {
-                        setState(() {
-                          _isLogin = !_isLogin;
-                        });
-                      },
+                          : 'I already have an account',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Title',
+                      ),
                     ),
+                    onPressed: () {
+                      setState(() {
+                        _isLogin = !_isLogin;
+                      });
+                    },
+                  ),
                 ],
               ),
             ),

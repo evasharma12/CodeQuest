@@ -26,7 +26,7 @@ class CirclePainter3 extends CustomPainter {
     final center = Offset(size.width * 1 / 4, size.height * 5 / 6);
     final paint = Paint()
       ..strokeWidth = 10
-      ..color = Colors.cyan[500]
+      ..color = Colors.tealAccent
       ..style= PaintingStyle.stroke;
       
     canvas.drawCircle(
