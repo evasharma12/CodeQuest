@@ -9,26 +9,29 @@ class Doubts extends StatefulWidget {
 }
 
 class _DoubtsState extends State<Doubts> {
+  final appBar = AppBar(
+    brightness: Brightness.dark,
+    elevation: 0,
+    iconTheme: IconThemeData(color: Colors.tealAccent),
+    foregroundColor: Colors.tealAccent,
+    backgroundColor: Colors.grey[900],
+    centerTitle: true,
+    title: Text(
+      'Ask your Doubts',
+      textAlign: TextAlign.right,
+      style: TextStyle(
+        color: Colors.tealAccent,
+        fontFamily: 'Title',
+      ),
+    ),
+  );
+
+  final ScrollController _controllerOne = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        brightness: Brightness.dark,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Colors.tealAccent),
-        foregroundColor: Colors.tealAccent,
-        backgroundColor: Colors.grey[900],
-        centerTitle: true,
-        title: Text(
-          'Ask your Doubts',
-          textAlign: TextAlign.right,
-          style: TextStyle(
-            color: Colors.tealAccent,
-            fontFamily: 'Title',
-          ),
-        ),
-      ),
+      appBar: appBar,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Container(height: 50),
@@ -49,107 +52,128 @@ class _DoubtsState extends State<Doubts> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CircularParticleScreen(),
-            SizedBox(
-              height: 10,
-            ),
-            Divider(
-              indent: 10,
-              endIndent: 10,
-              color: Colors.tealAccent,
-              height: 0,
-              thickness: 2,
-            ),
-            Container(
-              height: 600,
-              child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('questions/NdlPlLZdFfX1Rv1aflFQ/doubts')
-                      .snapshots(),
-                  builder: (ctx, streamSnapshot) {
-                    if (streamSnapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    final documents = streamSnapshot.data.docs;
-                    return ListView.builder(
-                        itemCount: documents.length,
-                        itemBuilder: (ctx, index) {
-                          return Column(
-                            children: [
-                              SizedBox(height: 20),
-                              Container(
-                                color: Colors.grey[800].withOpacity(.8),
-                                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: ListTile(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        ScaleRoute(
-                                          page: PopQuestion(
-                                              index, documents[index].id),
-                                        ),
-                                      );
-                                    },
-                                    leading: SingleChildScrollView(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Asked by: ${documents[index]['name']}",
-                                            style: TextStyle(
-                                              letterSpacing: 2,
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: 'Content',
-                                            ),
-                                          ),
-                                          SizedBox(height: 3),
-                                          Text(
-                                            "Domain: ${documents[index]['domain']}",
-                                            style: TextStyle(
-                                              letterSpacing: 2,
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: 'Title',
-                                            ),
-                                          ),
-                                          SizedBox(height: 5),
-                                          Container(
-                                            child: Text(
-                                              "Question: ${documents[index]['question']}",
-                                              overflow: TextOverflow.clip,
-                                              style: TextStyle(
-                                                letterSpacing: 2,
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontFamily: 'Title',
+        child: RawScrollbar(
+          isAlwaysShown: true,
+          controller: _controllerOne,
+          thumbColor: Colors.grey[300],
+          child: Container(
+            height: MediaQuery.of(context).size.height -
+                appBar.preferredSize.height -
+                MediaQuery.of(context).padding.top -
+                70,
+            child: SingleChildScrollView(
+              child: RawScrollbar(
+          //       isAlwaysShown: true,
+          // controller: _controllerOne,
+          thumbColor: Colors.grey[600],
+                              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    CircularParticleScreen(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      indent: 10,
+                      endIndent: 10,
+                      color: Colors.tealAccent,
+                      height: 0,
+                      thickness: 2,
+                    ),
+                    Container(
+                      height: 600,
+                      child: StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection(
+                                  'questions/NdlPlLZdFfX1Rv1aflFQ/doubts')
+                              .snapshots(),
+                          builder: (ctx, streamSnapshot) {
+                            if (streamSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            final documents = streamSnapshot.data.docs;
+                            return ListView.builder(
+                                itemCount: documents.length,
+                                itemBuilder: (ctx, index) {
+                                  return Column(
+                                    children: [
+                                      SizedBox(height: 20),
+                                      Container(
+                                        color: Colors.grey[800].withOpacity(.8),
+                                        margin:
+                                            EdgeInsets.fromLTRB(15, 0, 15, 0),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: ListTile(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                ScaleRoute(
+                                                  page: PopQuestion(index,
+                                                      documents[index].id),
+                                                ),
+                                              );
+                                            },
+                                            leading: SingleChildScrollView(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Asked by: ${documents[index]['name']}",
+                                                    style: TextStyle(
+                                                      letterSpacing: 2,
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                      fontFamily: 'Content',
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 3),
+                                                  Text(
+                                                    "Domain: ${documents[index]['domain']}",
+                                                    style: TextStyle(
+                                                      letterSpacing: 2,
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                      fontFamily: 'Title',
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 5),
+                                                  Container(
+                                                    child: Text(
+                                                      "Question: ${documents[index]['question']}",
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                      style: TextStyle(
+                                                        letterSpacing: 2,
+                                                        color: Colors.white,
+                                                        fontSize: 15,
+                                                        fontFamily: 'Title',
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        });
-                  }),
+                                    ],
+                                  );
+                                });
+                          }),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -169,8 +169,8 @@ class _ProfileState extends State<Profile> {
                   'Logout',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

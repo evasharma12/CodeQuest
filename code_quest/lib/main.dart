@@ -1,4 +1,3 @@
-import 'package:chat_app/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,9 +30,7 @@ class MyApp extends StatelessWidget {
         buttonTheme: ButtonTheme.of(context).copyWith(
           buttonColor: Colors.cyan[400],
           textTheme: ButtonTextTheme.primary,
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.circular(20),
-          // ),
+         
         ),
       ),
       debugShowCheckedModeBanner: false,

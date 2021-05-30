@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
 
@@ -26,8 +27,8 @@ class _AuthFormState extends State<AuthForm> {
   String _userName = '';
   String _userPassword = '';
 
-  void _trySubmit() {
-    final isValid = _formKey.currentState.validate();
+  void _trySubmit()async {
+    final isValid = await _formKey.currentState.validate();
     FocusScope.of(context)
         .unfocus(); //will close the keyboard after submission.
     //i.e. it will remove the focus from textformfield to nothing.
@@ -39,7 +40,18 @@ class _AuthFormState extends State<AuthForm> {
         _userName.trim(),
         _userPassword.trim(),
         _isLogin,
+        
       );
+      // StreamBuilder(
+      //   stream: FirebaseAuth.instance.authStateChanges(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasData) {
+      //      Navigator.pushNamed(context, '/home');
+      //     }
+      //   }
+      // );
+      
+      
 
       //Use those values to send the auth request ...
     }
@@ -155,6 +167,7 @@ class _AuthFormState extends State<AuthForm> {
                     onPressed: () {
                       setState(() {
                         _isLogin = !_isLogin;
+                                              
                       });
                     },
                   ),
