@@ -15,25 +15,29 @@ class _VideosState extends State<Videos> {
   final appBar = AppBar(
     brightness: Brightness.dark,
     elevation: 0,
-    iconTheme: IconThemeData(color: Colors.cyan[500]),
-    foregroundColor: Colors.cyan[500],
+    iconTheme: IconThemeData(
+      color: Colors.tealAccent,
+    ),
+    foregroundColor: Colors.tealAccent,
     backgroundColor: Colors.grey[900],
     centerTitle: true,
     title: Text(
       "Video Tutoials",
       textAlign: TextAlign.right,
       style: TextStyle(
-        color: Colors.cyan[400],
+        color: Colors.tealAccent,
+        fontFamily: 'Title',
       ),
     ),
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: appBar,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.cyan[500],
+        backgroundColor: Colors.tealAccent,
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.pushNamed(context, '/create');
@@ -67,7 +71,7 @@ class _VideosState extends State<Videos> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: EdgeInsets.all(8),
+                              margin: EdgeInsets.all(10),
                               child: YoutubePlayerBuilder(
                                 builder: (context, player) {
                                   return player;
@@ -87,33 +91,41 @@ class _VideosState extends State<Videos> {
                                     ),
                                   ),
                                   showVideoProgressIndicator: true,
-                                  progressIndicatorColor: Colors.cyan,
+                                  progressIndicatorColor: Colors.tealAccent,
                                   progressColors: ProgressBarColors(
-                                      playedColor: Colors.cyan,
-                                      handleColor: Colors.cyanAccent),
+                                      playedColor: Colors.tealAccent,
+                                      handleColor: Colors.tealAccent),
                                 ),
                               ),
                             ),
-                            Text(
-                              videoSnapshot.data.docs[index]['title'],
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.cyanAccent,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                videoSnapshot.data.docs[index]['title'],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.tealAccent,
+                                  fontFamily: 'Title'
+                                ),
                               ),
                             ),
-                            Text(
-                              videoSnapshot.data.docs[index]['name'],
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.cyanAccent,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                videoSnapshot.data.docs[index]['name'],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontFamily: 'Content',
+                                ),
                               ),
                             ),
                             Divider(
                               indent: 5,
                               endIndent: 5,
-                              color: Colors.cyanAccent,
+                              color: Colors.tealAccent,
                               thickness: 2,
-                            )
+                            ),
                           ],
                         ),
                       );

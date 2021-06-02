@@ -43,23 +43,28 @@ class _AskState extends State<Ask> {
       appBar: AppBar(
         brightness: Brightness.dark,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.cyan[500]),
-        foregroundColor: Colors.cyan[500],
+        iconTheme: IconThemeData(color: Colors.tealAccent),
+        foregroundColor: Colors.tealAccent,
         backgroundColor: Colors.grey[900],
         centerTitle: true,
         title: Text(
           "Add Question",
           style: TextStyle(
-            color: Colors.cyan[400],
+            color: Colors.tealAccent,
+            fontFamily: 'Title',
           ),
           textAlign: TextAlign.right,
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.cyan[500],
+        backgroundColor: Colors.tealAccent,
         child: Text(
           'Ask',
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 20),
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            fontSize: 20,
+            fontFamily: 'Title',
+          ),
         ),
         onPressed: (() {
           if (_nameController.text.isEmpty ||
@@ -76,12 +81,12 @@ class _AskState extends State<Ask> {
             }).then((value) {
               // FirebaseFirestore.instance
               //     .collection('questions').doc('NdlPlLZdFfX1Rv1aflFQ').collection('answers')
-                  
+
               //     .doc()
               //     .set({'answer': 'No answers yet',
               //     'id': value.id}, SetOptions(merge: true));
             });
-            
+
             answer_name++;
             Navigator.pop(context, '/doubts');
           }
@@ -97,12 +102,21 @@ class _AskState extends State<Ask> {
                   keyboardType: TextInputType.multiline,
                   maxLines: 1,
                   decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.cyan[300], width: 1),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                        width: 2,
                       ),
-                      hintText: 'Who are you?',
-                      labelText: 'Name'),
+                    ),
+                    hintText: 'Who are you?',
+                    hintStyle: TextStyle(
+                      fontFamily: 'Content',
+                    ),
+                    labelText: 'Name',
+                    labelStyle: TextStyle(
+                      fontFamily: 'Content',
+                    ),
+                  ),
                   controller: _nameController,
                   onSubmitted: (_) => _submitData(),
                 ),
@@ -112,13 +126,22 @@ class _AskState extends State<Ask> {
                   keyboardType: TextInputType.multiline,
                   maxLines: 1,
                   decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.cyan[300], width: 1),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                        width: 2,
                       ),
-                      hintText: 'Which field is abusing you?',
-                      labelText: 'Domain',
-                      fillColor: Colors.white),
+                    ),
+                    hintText: 'Which field is abusing you?',
+                    hintStyle: TextStyle(
+                      fontFamily: 'Content',
+                    ),
+                    labelText: 'Domain',
+                    fillColor: Colors.white,
+                    labelStyle: TextStyle(
+                      fontFamily: 'Content',
+                    ),
+                  ),
                   controller: _domainController,
                   onSubmitted: (_) => _submitData(),
                 ),
@@ -133,11 +156,19 @@ class _AskState extends State<Ask> {
                       maxLines: 1000,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.cyan[300], width: 1),
+                          borderSide: BorderSide(
+                            color: Colors.tealAccent,
+                            width: 2,
+                          ),
                         ),
                         hintText: 'Spill it out',
+                        hintStyle: TextStyle(
+                          fontFamily: 'Content',
+                        ),
                         labelText: 'Question',
+                        labelStyle: TextStyle(
+                          fontFamily: 'Content',
+                        ),
                       ),
                       controller: _questionController,
                       onSubmitted: (_) => _submitData(),
@@ -150,11 +181,14 @@ class _AskState extends State<Ask> {
                 children: [
                   Text(
                     'Paste your code here: ',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Content',
+                    ),
                   ),
                   IconButton(
                     icon: Icon(Icons.auto_awesome_motion,
-                        color: Colors.cyan[500]),
+                        color: Colors.tealAccent),
                     onPressed: _launchURL,
                   )
                 ],

@@ -23,7 +23,7 @@ class LinePainter2 extends CustomPainter{
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = Colors.cyan[500];
+    paint.color = Colors.tealAccent;
     paint.strokeWidth = 5;
     paint.strokeCap = StrokeCap.round;
   canvas.drawLine(
@@ -81,7 +81,7 @@ class LinePainter5 extends CustomPainter{
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = Colors.cyan[500];
+    paint.color = Colors.tealAccent;
     paint.strokeWidth = 5;
     paint.strokeCap = StrokeCap.round;
   

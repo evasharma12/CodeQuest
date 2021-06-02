@@ -25,8 +25,7 @@ class _CreateState extends State<Create> {
       setState(() {
         Navigator.pop(context);
       });
-    }
-    else {
+    } else {
       setState(() {
         Navigator.pop(context);
       });
@@ -40,20 +39,23 @@ class _CreateState extends State<Create> {
       appBar: AppBar(
         brightness: Brightness.dark,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.cyan[500]),
-        foregroundColor: Colors.cyan[500],
+        iconTheme: IconThemeData(
+          color: Colors.tealAccent,
+        ),
+        foregroundColor: Colors.tealAccent,
         backgroundColor: Colors.grey[900],
         centerTitle: true,
         title: Text(
           "Create",
           textAlign: TextAlign.right,
           style: TextStyle(
-            color: Colors.cyan[400],
+            color: Colors.tealAccent,
+            fontFamily: 'Title',
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.cyan[500],
+        backgroundColor: Colors.tealAccent,
         child: Text(
           'Upload',
           style: TextStyle(
@@ -77,12 +79,17 @@ class _CreateState extends State<Create> {
                     labelStyle: TextStyle(
                       color: Colors.grey[900],
                       letterSpacing: 2,
+                      fontFamily: 'Content',
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyan),
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                      ),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyan),
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                      ),
                     ),
                   ),
                   onChanged: (value) {
@@ -103,12 +110,17 @@ class _CreateState extends State<Create> {
                     labelStyle: TextStyle(
                       color: Colors.grey[900],
                       letterSpacing: 2,
+                      fontFamily: 'Content',
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyan),
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                      ),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyan),
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                      ),
                     ),
                   ),
                   onChanged: (value) {
@@ -130,12 +142,17 @@ class _CreateState extends State<Create> {
                     labelStyle: TextStyle(
                       color: Colors.grey[900],
                       letterSpacing: 2,
+                      fontFamily: 'Content',
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyan),
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                      ),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyan),
+                      borderSide: BorderSide(
+                        color: Colors.tealAccent,
+                      ),
                     ),
                   ),
                   onChanged: (value) {
@@ -151,35 +168,40 @@ class _CreateState extends State<Create> {
                 height: 50,
               ),
               Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(
-                    foregroundPainter: LinePainter1(),
-                  )),
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: CustomPaint(
+                  foregroundPainter: LinePainter1(),
+                ),
+              ),
               Container(
-                  height: 70,
-                  width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(
-                    foregroundPainter: LinePainter2(),
-                  )),
+                height: 70,
+                width: MediaQuery.of(context).size.width,
+                child: CustomPaint(
+                  foregroundPainter: LinePainter2(),
+                ),
+              ),
               Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(
-                    foregroundPainter: LinePainter3(),
-                  )),
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: CustomPaint(
+                  foregroundPainter: LinePainter3(),
+                ),
+              ),
               Container(
-                  height: 30,
-                  width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(
-                    foregroundPainter: LinePainter4(),
-                  )),
+                height: 30,
+                width: MediaQuery.of(context).size.width,
+                child: CustomPaint(
+                  foregroundPainter: LinePainter4(),
+                ),
+              ),
               Container(
-                  height: 70,
-                  width: MediaQuery.of(context).size.width,
-                  child: CustomPaint(
-                    foregroundPainter: LinePainter5(),
-                  )),
+                height: 70,
+                width: MediaQuery.of(context).size.width,
+                child: CustomPaint(
+                  foregroundPainter: LinePainter5(),
+                ),
+              ),
             ],
           ),
         ),

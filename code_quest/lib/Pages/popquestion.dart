@@ -40,8 +40,13 @@ class _PopQuestionState extends State<PopQuestion> {
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.fromLTRB(20, 5, 20, 10),
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          20,
+                        ),
+                      ),
+                    ),
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,25 +65,38 @@ class _PopQuestionState extends State<PopQuestion> {
                               }
                               final documents = streamSnapshot.data.docs;
                               return SafeArea(
-                                  child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20.0, 20, 20, 0),
-                                    child: Text('Question: ',
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        20.0,
+                                        20,
+                                        20,
+                                        0,
+                                      ),
+                                      child: Text(
+                                        'Question: ',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20.0, 10, 20, 20),
-                                    child: Text(
-                                        '${documents[widget.index]['question']}'),
-                                  ),
-                                ],
-                              ));
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Title',
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20.0, 10, 20, 20),
+                                      child: Text(
+                                        '${documents[widget.index]['question']}',
+                                        style: TextStyle(
+                                          fontFamily: 'Content',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
                             },
                           ),
                           StreamBuilder(
@@ -104,15 +122,22 @@ class _PopQuestionState extends State<PopQuestion> {
                                     child: Text(
                                       'Answers: ',
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Title',
+                                      ),
                                     ),
                                   ),
                                   for (var i = 0; i < documents.length; i++)
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
                                           20, 0, 10, 10),
-                                      child: Text(documents[i]['answer']),
-                                    )
+                                      child: Text(
+                                        documents[i]['answer'],
+                                        style: TextStyle(
+                                          fontFamily: 'Content',
+                                        ),
+                                      ),
+                                    ),
                                 ],
                               );
                             },
@@ -124,14 +149,16 @@ class _PopQuestionState extends State<PopQuestion> {
                   Container(
                     child: Center(
                       child: RaisedButton(
-                        color: Colors.teal,
+                        color: Colors.tealAccent,
                         child: FittedBox(
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
                               'Add Answer',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.grey[900],
+                                  fontFamily: "Title"
+                              ),
                             ),
                           ),
                         ),

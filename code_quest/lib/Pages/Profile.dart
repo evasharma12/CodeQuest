@@ -21,15 +21,15 @@ class _ProfileState extends State<Profile> {
         toolbarHeight: 60,
         brightness: Brightness.dark,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.cyan[500]),
-        foregroundColor: Colors.cyan[500],
+        iconTheme: IconThemeData(color: Colors.tealAccent),
+        foregroundColor: Colors.tealAccent,
         backgroundColor: Colors.grey[900],
         centerTitle: true,
         title: Text(
           "Profile",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.cyan[400],
+            color: Colors.tealAccent,
           ),
         ),
       ),
@@ -43,7 +43,7 @@ class _ProfileState extends State<Profile> {
             CircularParticleScreen(),
             CircleAvatar(
               radius: 78,
-              backgroundColor: Colors.cyan,
+              backgroundColor: Colors.tealAccent,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
                     "https://images.unsplash.com/photo-1593642532454-e138e28a63f4?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"),
@@ -53,7 +53,7 @@ class _ProfileState extends State<Profile> {
             Divider(
               height: 50,
               thickness: 2,
-              color: Colors.cyan[400],
+              color: Colors.tealAccent,
             ),
             Row(
               children: [
@@ -86,7 +86,7 @@ class _ProfileState extends State<Profile> {
                               Text(
                                 documents[i]['username'],
                                 style: TextStyle(
-                                  color: Colors.cyan[400],
+                                  color: Colors.tealAccent,
                                   letterSpacing: 3,
                                   fontSize: 18,
                                 ),
@@ -113,7 +113,7 @@ class _ProfileState extends State<Profile> {
                 Text(
                   "Champion",
                   style: TextStyle(
-                    color: Colors.cyan[400],
+                    color: Colors.tealAccent,
                     letterSpacing: 3,
                     fontSize: 18,
                   ),
@@ -146,7 +146,7 @@ class _ProfileState extends State<Profile> {
                       "${user.email}",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: Colors.cyan[400],
+                        color: Colors.tealAccent,
                         letterSpacing: 3,
                         fontSize: 18,
                       ),
@@ -161,13 +161,13 @@ class _ProfileState extends State<Profile> {
             Divider(
               height: 50,
               thickness: 2,
-              color: Colors.cyan[400],
+              color: Colors.tealAccent,
             ),
             RaisedButton(
-                color: Colors.cyan[400],
+                color: Colors.tealAccent,
                 child: Text(
                   'Logout',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.grey[900]),
                 ),
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
@@ -213,7 +213,7 @@ class CircularParticleScreen extends StatelessWidget {
               Colors.white.withAlpha(210),
               Colors.white.withAlpha(210),
               Colors.black.withAlpha(210),
-              Colors.cyan[500].withAlpha(210)
+              Colors.tealAccent.withAlpha(210)
             ],
             awayAnimationCurve: Curves.easeInOutBack,
             enableHover: true,

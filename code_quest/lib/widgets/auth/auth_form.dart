@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
 
@@ -27,7 +26,7 @@ class _AuthFormState extends State<AuthForm> {
   String _userName = '';
   String _userPassword = '';
 
-  void _trySubmit()async {
+  void _trySubmit() async {
     final isValid = await _formKey.currentState.validate();
     FocusScope.of(context)
         .unfocus(); //will close the keyboard after submission.
@@ -40,7 +39,6 @@ class _AuthFormState extends State<AuthForm> {
         _userName.trim(),
         _userPassword.trim(),
         _isLogin,
-        
       );
       // StreamBuilder(
       //   stream: FirebaseAuth.instance.authStateChanges(),
@@ -50,8 +48,6 @@ class _AuthFormState extends State<AuthForm> {
       //     }
       //   }
       // );
-      
-      
 
       //Use those values to send the auth request ...
     }
@@ -141,13 +137,14 @@ class _AuthFormState extends State<AuthForm> {
                   // if (widget.isLoading)CircularProgressIndicator(),
                   // if (!widget.isLoading)
                   RaisedButton(
-                      color: Colors.teal,
+                      color: Colors.tealAccent,
                       child: Text(
                         _isLogin ? 'Log In' : 'SignUp',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Title',
+                          color: Colors.grey[900],
                         ),
                       ),
                       onPressed: _trySubmit),
@@ -167,7 +164,6 @@ class _AuthFormState extends State<AuthForm> {
                     onPressed: () {
                       setState(() {
                         _isLogin = !_isLogin;
-                                              
                       });
                     },
                   ),
