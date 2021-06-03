@@ -12,7 +12,7 @@ To use the application follow the given steps:
 
 ### Main Screen
 
-<img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622739788/WhatsApp_Image_2021-06-03_at_8.29.26_PM_zjhaai.jpg" width="150" height="250" />
+<img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622739788/WhatsApp_Image_2021-06-03_at_8.29.26_PM_zjhaai.jpg" width="200" height="250" />
 
 
 This screen will open up in the begining. Tap on _Get Started ..._ and let the venture begin!
