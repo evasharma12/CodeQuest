@@ -38,7 +38,7 @@ _Press back from your mobile once after signing in or creating a new account. It
 
 After signing in or registering, you will be directed to the home screen. To continue the quest of doubts solving and learning new technologies, tap on the top left icon on the appbar and a drawer will open up.
 
-<img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622739789/WhatsApp_Image_2021-06-03_at_8.29.26_PM_3_dh7czh.jpgg" width="180" height="300" /> <img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622739790/WhatsApp_Image_2021-06-03_at_8.29.26_PM_4_j8juvx.jpg" width="180" height="300" />
+<img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622739789/WhatsApp_Image_2021-06-03_at_8.29.26_PM_3_dh7czh.jpg" width="180" height="300" />                    <img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622739790/WhatsApp_Image_2021-06-03_at_8.29.26_PM_4_j8juvx.jpg" width="180" height="300" />
 
 
 
