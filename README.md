@@ -89,7 +89,7 @@ You can view your username, email id and your tech level in the profile screen.
 
 <img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622739789/WhatsApp_Image_2021-06-03_at_8.29.26_PM_11_ksaq09.jpg" width="180" height="300" />
 
-#### Current level
+#### Current League
 This is a feature which lets you know what is your level in technology and motivates you to constantly interact with the world in the language of tech and always improve your skills!
 
 #### Logout
