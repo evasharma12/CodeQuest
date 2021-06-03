@@ -2,6 +2,8 @@
 
 An application to get all your coding and tech doubts cleared by your own peeps!
 
+<img src="https://res.cloudinary.com/dldoqjanc/image/upload/v1622745840/logo_b1hb3n.jpg" width="100" height="100" />
+
 ## Getting Started
 
 To get started download the apk and install the application in your mobile.
